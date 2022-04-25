@@ -1,9 +1,13 @@
 "use strict";
 
 import cors from "cors";
+// const cors = require("cors");
 import express from "express";
+// const express = require("express");
 import mongoose from "mongoose";
+// const mongoose = require("mongoose");
 import bodyParser from "body-parser";
+// const bodyParser = require("bodyParser");
 
 const app = express();
 const router = express.Router();
@@ -17,7 +21,7 @@ mongoose.connect(MONGODB_URI);
 
 app.use(bodyParser.json(), cors());
 
-app.use(require("../route/auth-router"));
+// app.use(require("../route/auth-router"));
 
 app.all("*", (request, response) => {
     console.log("Returning a 404 from the catch-all route");
@@ -25,16 +29,18 @@ app.all("*", (request, response) => {
 });
 
 // error middleware
-app.use(require("./error-middleware"));
+// app.use(require("./error-middleware"));
 
-export const start = () => {
+const start = () => {
     app.listen(PORT, () => {
         console.log(`Listening on port: ${PORT}`);
     });
 };
 
-export const stop = () => {
+const stop = () => {
     app.close(PORT, () => {
         console.log(`Shut down on port: ${PORT}`);
     });
 };
+
+export { start, stop };
